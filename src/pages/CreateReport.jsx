@@ -23,8 +23,6 @@ const CreateReport = () => {
 
   const navigate = useNavigate();
 
-  
-
   useEffect(() => {
     dispatch(getAdminValues());
     if (!contract) navigate("/newReport");

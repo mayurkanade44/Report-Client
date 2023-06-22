@@ -86,7 +86,6 @@ const Dashboard = () => {
   const handleGenerate = (id) => {
     dispatch(generateReport(id));
   };
-  console.log(process.env.REACT_APP_CQR);
 
   const handleSearch = (e) => {
     e.preventDefault();

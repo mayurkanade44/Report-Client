@@ -8,9 +8,16 @@ registerLicense(process.env.REACT_APP_IMAGE);
 const ImageEditor = ({ onClose, name }) => {
   const { reportLoading } = useSelector((store) => store.report);
   const dispatch = useDispatch();
+  const toolbar = ["Annotate", "Rectangle", "Ellipse", "Line"];
   let imgObj;
 
-  const upload = async () => {
+  const toolbarUpdating = (args) => {
+    if (args.toolbarType === "shapes") {
+      args.toolbarItems = ["strokeColor"];
+    }
+  };
+
+  const upload = async (args) => {
     try {
       const image = convertImageToBase64(imgObj.getImageData());
       const res = await dispatch(imageUpload({ image })).unwrap();
@@ -38,6 +45,8 @@ const ImageEditor = ({ onClose, name }) => {
           ref={(img) => {
             imgObj = img;
           }}
+          toolbar={toolbar}
+          toolbarUpdating={toolbarUpdating}
         ></ImageEditorComponent>
         <button
           disabled={reportLoading}
